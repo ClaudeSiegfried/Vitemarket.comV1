@@ -1,0 +1,60 @@
+version: '3'
+services:
+
+  #Laravel App
+  vitemarket:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: vitemarket.com/image
+    container_name: vitemarket.com
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: vitemarket
+      SERVICE_TAGS: dev
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+
+
+  #Nginx Service
+  nginx-proxy:
+    image: jwilder/nginx-proxy:alpine
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./:/var/www/html
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./nginx/ssl/:/etc/nginx/ssl/
+
+
+  #MySQL Service
+  vitemarket_db:
+    image: mysql:5.7
+    container_name: vitemarket_db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_DATABASE: vitemarket_db
+      MYSQL_USER: vitemarket_db_admin
+      MYSQL_PASSWORD: vitemarket_db_password
+      MYSQL_ROOT_PASSWORD: vitemarket_db_password
+    volumes:
+      - mysqldata:/var/lib/mysql/
+
+
+#Docker Networks
+networks:
+  default:
+    external:
+      name: nginx-proxy
+#Volumes
+volumes:
+  mysqldata:
+    driver: local

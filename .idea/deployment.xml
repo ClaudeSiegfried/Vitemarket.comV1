@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" promptOnRemoteOverwrite="CHECK_CONTENT" serverName="Vitemarket.Initiatives" notifyRemoteChanges="true" compareModeInSync="TEXT" showEqualInSync="true" showDifferentInSync="false">
+    <serverData>
+      <paths name="Initiatives.Africa">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="ViteMarket">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/www/Vitemarket" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/.env" />
+            <excludedPath local="true" path="$PROJECT_DIR$/vendor" />
+            <excludedPath local="true" path="$PROJECT_DIR$/node_modules" />
+            <excludedPath local="true" path="$PROJECT_DIR$/bootstrap" />
+            <excludedPath path="/www/Vitemarket/public/vendor" />
+            <excludedPath path="/www/Vitemarket/public/custom/css/datatables" />
+            <excludedPath path="/www/Vitemarket/public/custom/DataTables" />
+            <excludedPath path="/www/Vitemarket/public/custom/js/datatables" />
+            <excludedPath path="/www/Vitemarket/public/custom/js/bootstrap-select" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+      <paths name="Vitemarket.Initiatives">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/node_modules" />
+            <excludedPath local="true" path="$PROJECT_DIR$/nginx" />
+            <excludedPath local="true" path="$PROJECT_DIR$/Sauvegardes" />
+            <excludedPath local="true" path="$PROJECT_DIR$/.env" />
+            <excludedPath local="true" path="$PROJECT_DIR$/docker-compose.yml" />
+            <excludedPath local="true" path="$PROJECT_DIR$/Dockerfile" />
+            <excludedPath path="/vitemarket/node_modules" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

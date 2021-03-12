@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="51.210.181.8" id="f8fe2e9c-9f69-43eb-8ca9-f298e4106d01" port="22" customName="ViteMarket" nameFormat="CUSTOM" username="debian">
+        <option name="customName" value="ViteMarket" />
+      </sshConfig>
+      <sshConfig authType="PASSWORD" host="51.210.100.221" id="13e7efa2-78f2-4701-ac7e-7b703133447f" port="22" customName="Initiatives.africa" nameFormat="CUSTOM" username="debian">
+        <option name="customName" value="Initiatives.africa" />
+      </sshConfig>
+      <sshConfig authType="PASSWORD" host="51.210.100.221" id="66dae90b-db70-429b-adc9-fe295ce4d4ac" port="22" customName="Vitemarket.Initiatives" nameFormat="CUSTOM" username="debian">
+        <option name="customName" value="Vitemarket.Initiatives" />
+      </sshConfig>
+      <sshConfig authType="PASSWORD" host="51.210.181.8" id="bb340edc-3953-482f-a5bf-607db25e1c63" port="22" customName="ViteMarket" nameFormat="CUSTOM" username="debian">
+        <option name="customName" value="ViteMarket" />
+      </sshConfig>
+    </configs>
+  </component>
+</project>

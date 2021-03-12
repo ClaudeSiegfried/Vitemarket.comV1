@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="3026dbbf-abb0-47a0-a17d-e28f02f70d84" name="ViteMarket" url="http://51.210.181.8">
+        <fileTransfer rootFolder="/home/debian" accessType="SFTP" host="51.210.181.8" port="22" sshConfigId="bb340edc-3953-482f-a5bf-607db25e1c63" sshConfig="ViteMarket">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="b38d561f-679b-4e47-abcb-16f728971892" name="Initiatives.Africa" url="http://51.210.100.221">
+        <fileTransfer accessType="SFTP" host="51.210.100.221" port="22" sshConfigId="13e7efa2-78f2-4701-ac7e-7b703133447f" sshConfig="Initiatives.africa">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="88106783-883f-4f2d-9013-a229d401e74e" name="Vitemarket.Initiatives" url="http://51.210.100.221">
+        <fileTransfer rootFolder="/var/www/html/vitemarket" accessType="SFTP" host="51.210.100.221" port="22" sshConfigId="66dae90b-db70-429b-adc9-fe295ce4d4ac" sshConfig="Vitemarket.Initiatives">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

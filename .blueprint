@@ -1,0 +1,111 @@
+created:
+    - database/migrations/2020_06_05_022015_create_clients_table.php
+    - database/migrations/2020_06_05_022016_create_fournisseurs_table.php
+    - database/migrations/2020_06_05_022017_create_livreurs_table.php
+    - database/migrations/2020_06_05_022018_create_marques_table.php
+    - database/migrations/2020_06_05_022019_create_photos_table.php
+    - database/migrations/2020_06_05_022020_create_localisations_table.php
+    - database/migrations/2020_06_05_022021_create_categories_table.php
+    - database/migrations/2020_06_05_022022_create_produits_table.php
+    - database/migrations/2020_06_05_022023_create_stocks_table.php
+    - database/migrations/2020_06_05_022024_create_expirations_table.php
+    - database/migrations/2020_06_05_022025_create_paniers_table.php
+    - database/migrations/2020_06_05_022026_create_mmoneys_table.php
+    - database/migrations/2020_06_05_022027_create_commandes_table.php
+    - database/migrations/2020_06_05_022028_create_paiements_table.php
+    - database/migrations/2020_06_05_022029_create_livraisons_table.php
+    - database/migrations/2020_06_05_022030_create_roles_table.php
+    - database/migrations/2020_06_05_022030_create_livraison_livreur_table.php
+    - database/migrations/2020_06_05_022030_create_marque_produit_table.php
+    - database/migrations/2020_06_05_022030_create_categorie_produit_table.php
+    - database/migrations/2020_06_05_022030_create_mmoney_paiement_table.php
+    - database/migrations/2020_06_05_022030_create_role_user_table.php
+    - app/Client.php
+    - app/Fournisseur.php
+    - app/Livreur.php
+    - app/Marque.php
+    - app/Photo.php
+    - app/Localisation.php
+    - app/Categorie.php
+    - app/Produit.php
+    - app/Stock.php
+    - app/Expiration.php
+    - app/Panier.php
+    - app/Mmoney.php
+    - app/Commande.php
+    - app/Paiement.php
+    - app/Livraison.php
+    - app/Role.php
+    - database/factories/ClientFactory.php
+    - database/factories/FournisseurFactory.php
+    - database/factories/LivreurFactory.php
+    - database/factories/MarqueFactory.php
+    - database/factories/PhotoFactory.php
+    - database/factories/LocalisationFactory.php
+    - database/factories/CategorieFactory.php
+    - database/factories/ProduitFactory.php
+    - database/factories/StockFactory.php
+    - database/factories/ExpirationFactory.php
+    - database/factories/PanierFactory.php
+    - database/factories/MmoneyFactory.php
+    - database/factories/CommandeFactory.php
+    - database/factories/PaiementFactory.php
+    - database/factories/LivraisonFactory.php
+    - database/factories/RoleFactory.php
+    - database/seeds/UserSeeder.php
+    - database/seeds/ClientSeeder.php
+    - database/seeds/FournisseurSeeder.php
+    - database/seeds/LivreurSeeder.php
+    - database/seeds/MarqueSeeder.php
+    - database/seeds/CategorieSeeder.php
+    - database/seeds/ProduitSeeder.php
+    - app/Http/Controllers/Utilisateurs/ClientController.php
+    - app/Http/Controllers/Utilisateurs/FournisseurController.php
+    - app/Http/Controllers/Utilisateurs/LivreurController.php
+    - app/Http/Controllers/GestionProduits/MarqueController.php
+    - app/Http/Controllers/GestionPhotos/PhotoController.php
+    - app/Http/Controllers/Localisations/LocalissationController.php
+    - app/Http/Controllers/GestionProduits/CategorieController.php
+    - app/Http/Controllers/GestionProduits/ProduitController.php
+    - app/Http/Controllers/GestionProduits/StockController.php
+    - app/Http/Controllers/GestionProduits/ExpirationController.php
+    - app/Http/Controllers/GestionCommandes/PanierController.php
+    - app/Http/Controllers/Configurations/MmoneyController.php
+    - app/Http/Controllers/GestionCommandes/CommandeController.php
+    - app/Http/Controllers/GestionCommandes/PaiementController.php
+    - app/Http/Controllers/GestionLivraisons/LivraisonController.php
+    - tests/Feature/Http/Controllers/Utilisateurs/ClientControllerTest.php
+    - tests/Feature/Http/Controllers/Utilisateurs/FournisseurControllerTest.php
+    - tests/Feature/Http/Controllers/Utilisateurs/LivreurControllerTest.php
+    - tests/Feature/Http/Controllers/GestionProduits/MarqueControllerTest.php
+    - tests/Feature/Http/Controllers/GestionPhotos/PhotoControllerTest.php
+    - tests/Feature/Http/Controllers/Localisations/LocalissationControllerTest.php
+    - tests/Feature/Http/Controllers/GestionProduits/CategorieControllerTest.php
+    - tests/Feature/Http/Controllers/GestionProduits/ProduitControllerTest.php
+    - tests/Feature/Http/Controllers/GestionProduits/StockControllerTest.php
+    - tests/Feature/Http/Controllers/GestionProduits/ExpirationControllerTest.php
+    - tests/Feature/Http/Controllers/GestionCommandes/PanierControllerTest.php
+    - tests/Feature/Http/Controllers/Configurations/MmoneyControllerTest.php
+    - tests/Feature/Http/Controllers/GestionCommandes/CommandeControllerTest.php
+    - tests/Feature/Http/Controllers/GestionCommandes/PaiementControllerTest.php
+    - tests/Feature/Http/Controllers/GestionLivraisons/LivraisonControllerTest.php
+updated:
+    - routes/web.php
+models:
+    User: { name: 'string:191', email: 'string:191', email_verified_at: 'datetime nullable', password: 'string:191', remember_token: 'string:100 nullable' }
+    Client: { user_id: 'id foreign index', localisation_id: 'id foreign nullable' }
+    Fournisseur: { etablissement: 'string unique', rccm: 'string unique', nif: string, description: text, user_id: 'id foreign', relationships: { hasMany: Produit } }
+    Livreur: { user_id: 'id foreign index', dispo: 'boolean default:false', relationships: { belongsToMany: Livraison } }
+    Marque: { id: 'bigincrements index', libele: string, description: 'text nullable', relationships: { belongsToMany: Produit } }
+    Photo: { libele: 'string unique', path: string }
+    Localisation: { user_id: 'id foreign', photo_id: 'id foreign', description: longtext, latitude: 'decimale:8,2 nullable:0', longitude: 'decimale:8,2 nullable:0', relationships: { belongsTo: Commande } }
+    Categorie: { libele: string, description: 'text nullable', photo_id: 'id foreign nullable', relationships: { belongsToMany: Produit } }
+    Produit: { Libele: string, description: text, taille: 'float:8,2 default:0', poids: 'decimal:8,2 default:0', prix: 'decimal default:0', code_gen: 'string nullable:0', date_de_creation: 'date nullable', categorie_id: 'id foreign', marque_id: 'id foreign', fournisseur_id: 'id foreign', photo_id: 'id foreign', relationships: { belongsTo: Stock } }
+    Stock: { produit_id: 'id foreign', quantite_physique: 'integer default:1', quantite_predebite: 'integer default:0', quantite_facture: 'integer default:0', expiration_id: 'id foreign' }
+    Expiration: { date_de_peremption: date, relationships: { belongsTo: Stock } }
+    Panier: { produit_id: 'id foreign', quantite_achete: 'integer default:1', relationships: { belongsTo: Commande } }
+    Mmoney: { fam: string, credential: string, relationships: { belongsToMany: Paiement } }
+    Commande: { panier_id: 'id foreign', client_id: 'id foreign', localisation_id: 'id foreign', code_commande: 'string nullable', date_livraison: 'date index', statut: 'enum:pending,successful,failed', relationships: { hasOne: 'Paiement,Livraison' } }
+    Paiement: { commande_id: 'id foreign', client_id: 'id foreign', mmoney_id: 'id foreign index', statut: 'enum:paid,pending,liquide', montant: 'decimal default:0' }
+    Livraison: { commande_id: 'id foreign', livreur_id: 'id foreign index', statut: 'enum:pending,successful,failed' }
+    Role: { name: string, relationships: { belongsToMany: User } }

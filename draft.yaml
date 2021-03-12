@@ -1,0 +1,328 @@
+models:
+
+  Client:
+    user_id : id foreign index
+    localisation_id : id foreign nullable
+
+  Fournisseur:
+    etablissement : string unique
+    rccm : string unique
+    nif : string
+    description : text
+    user_id : id foreign
+    relationships:
+      hasMany: Produit
+
+  Livreur:
+    user_id : id foreign index
+    dispo : boolean default:false
+    relationships:
+      belongsToMany: Livraison
+
+  Marque:
+    id: bigincrements index
+    libele : string
+    description : text nullable
+    relationships:
+      belongsToMany: Produit
+
+  Photo:
+    libele : string unique
+    path : string
+
+  Localisation:
+    user_id : id foreign
+    photo_id : id foreign
+    description : longtext
+    latitude : decimale:8,2 nullable:0
+    longitude : decimale:8,2 nullable:0
+    relationships:
+      belongsTo: Commande
+
+  Categorie:
+    libele : string
+    description : text nullable
+    photo_id : id foreign nullable
+    relationships:
+      belongsToMany: Produit
+
+  Produit:
+    Libele : string
+    description : text
+    taille : float:8,2 default:0
+    poids : decimal:8,2 default:0
+    prix : decimal default:0
+    code_gen : string nullable:0
+    date_de_creation : date nullable
+    categorie_id : id foreign
+    marque_id : id foreign
+    fournisseur_id : id foreign
+    photo_id : id foreign
+    relationships:
+      belongsTo: Stock
+
+  Stock:
+    produit_id : id foreign
+    quantite_physique : integer default:1
+    quantite_predebite : integer default:0
+    quantite_facture : integer default:0
+    expiration_id : id foreign
+
+  Expiration :
+    date_de_peremption : date
+    relationships:
+      belongsTo: Stock
+
+  Panier:
+    produit_id : id foreign
+    quantite_achete : integer default:1
+    relationships:
+      belongsTo: Commande
+
+  Mmoney:
+    fam: string
+    credential: string
+    relationships:
+      belongsToMany: Paiement
+
+  Commande:
+    panier_id : id foreign
+    client_id : id foreign
+    localisation_id : id foreign
+    code_commande : string nullable
+    date_livraison : date index
+    statut: enum:pending,successful,failed
+    relationships:
+      hasOne: Paiement,Livraison
+
+  Paiement:
+    commande_id : id foreign
+    client_id : id foreign
+    mmoney_id : id foreign index
+    statut : enum:paid,pending,liquide
+    montant : decimal default:0
+
+  Livraison:
+    commande_id : id foreign
+    livreur_id : id foreign index
+    statut: enum:pending,successful,failed
+
+  Role:
+    name: string
+    relationships:
+      belongsToMany: User
+
+
+controllers:
+
+  /Utilisateurs/Client:
+    index:
+      query: all
+      render: client.index with:clients
+    create:
+      query: all:roles
+      render: client.create with:roles
+    store:
+      validate: client
+      save: client
+      flash: client
+      redirect: client.create
+    edit:
+      render: client.edit with:client
+    update:
+      validate: client
+      update: client
+      flash: client
+      redirect: client.show with:client
+    destroy:
+      delete: client
+      redirect: client.index
+
+  /Utilisateurs/Fournisseur:
+      index:
+        query: all
+        render: fournisseur.index with:fournisseurs
+      create:
+        query: all:fournisseurs
+        render: fournisseur.create with fournisseurs
+      store:
+        validate: etablissement,user_id
+        save: fournisseur
+        flash: fournisseur
+        redirect: fournisseur.create with:fournisseur
+      show:
+        render: fournisseur.show with:fournisseur
+      edit:
+        render: fournisseur.edit with:fournisseur
+      update:
+        validate: fournisseur
+        update: fournisseur
+        flash: fournisseur
+        redirect: fournisseur.index with:fournisseur
+      destroy:
+        delete: fournisseur
+        redirect: fournisseur.index
+
+  /Utilisateurs/Livreur:
+    resource: all
+    index:
+      query: all
+      render: livreur.index with:livreurs
+    create:
+      query: all:livreurs
+      render: livreur.create with livreurs
+    store:
+      validate: etablissement,user_id
+      save: livreur
+      flash: livreur
+      redirect: livreur.create with:livreur
+    show:
+      render: livreur.show with:livreur
+    edit:
+      render: livreur.edit with:livreur
+    update:
+      validate: livreur
+      update: livreur
+      flash: livreur
+      redirect: livreur.index with:livreur
+
+  /GestionProduits/Marque:
+      index:
+        query: all
+        render: marque.index with:marques
+      create:
+        query: all:marques
+        render: marque.create with marques
+      store:
+        validate: libele
+        save: marque
+        flash: marque
+        redirect: marque.create with:marque
+      edit:
+        render: marque.edit with:marque
+      update:
+        validate: libele
+        update: marque
+        flash: marque
+        redirect: marque.index with:marque
+
+  /GestionPhotos/Photo:
+    resource: all
+
+  /Localisations/Localissation:
+    resource: all
+
+  /GestionProduits/Categorie:
+    index:
+      query: all
+      render: categorie.index with:categories
+    create:
+      query: all
+      render: categorie.create with:categories
+    store:
+      validate: libele
+      save: categorie
+      flash: categorie
+      redirect: categorie.create
+    show:
+      render: categorie.show with:categorie
+    edit:
+      render: categorie.edit with:categorie
+    update:
+      validate: categorie
+      update: categorie
+      flash: categorie
+      redirect: categorie.show with:categorie
+    destroy:
+      delete: categorie
+      redirect: categorie.index
+
+  /GestionProduits/Produit:
+    index:
+      query: all
+      render: produit.index with:produits
+    create:
+      query: all
+      render: produit.create with:produits
+    store:
+      validate: produit
+      save: produit
+      flash: produit
+      redirect: produit.create
+    show:
+      render: produit.show with:produit
+    edit:
+      render: produit.edit with:produit
+    update:
+      validate: produit
+      update: produit
+      flash: produit
+      redirect: produit.show with:produit
+    destroy:
+      delete: produit
+      redirect: produit.index
+
+  /GestionProduits/Stock:
+      index:
+        query: all
+        render: stock.index with:stocks
+      create:
+        query: all:produits
+        render: stock.create with:produits
+      store:
+        validate: stock
+        save: stock
+        flash: stock
+        redirect: stock.create
+      show:
+        render: stock.show with:stock
+      edit:
+        render: stock.edit with:stock
+      update:
+        validate: stock
+        update: stock
+        flash: stock
+        redirect: stock.show with:stock
+      destroy:
+        delete: stock
+        redirect: stock.index
+
+  /GestionProduits/Expiration:
+    resource: all
+
+  /GestionCommandes/Panier:
+      resource: all
+
+  /Configurations/Mmoney:
+        resource: all
+        index:
+          query: all
+          render: mmoney.index with:mmoneys
+        create:
+          query: all:mmoneys
+          render: mmoney.create with mmoneys
+        store:
+          validate: fam,credential
+          save: mmoney
+          flash: mmoney
+          redirect: mmoney.create with:mmoney
+        show:
+          render: mmoney.show with:mmoney
+        edit:
+          render: mmoney.edit with:mmoney
+        update:
+          validate: mmoney
+          update: mmoney
+          flash: mmoney
+          redirect: mmoney.index with:mmoney
+
+  /GestionCommandes/Commande:
+    resource: all
+
+  /GestionCommandes/Paiement:
+      resource: all
+
+  /GestionLivraisons/Livraison:
+      resource: all
+
+seeders: User,Client,Fournisseur,Livreur,Marque,Categorie,Produit
